@@ -4,13 +4,13 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class FullScannerActivity extends BaseScannerActivity implements MessageD
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
-        if(state != null) {
+        if (state != null) {
             mFlash = state.getBoolean(FLASH_STATE, false);
             mAutoFocus = state.getBoolean(AUTO_FOCUS_STATE, true);
             mSelectedIndices = state.getIntegerArrayList(SELECTED_FORMATS);
@@ -77,7 +77,7 @@ public class FullScannerActivity extends BaseScannerActivity implements MessageD
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuItem menuItem;
 
-        if(mFlash) {
+        if (mFlash) {
             menuItem = menu.add(Menu.NONE, R.id.menu_flash, 0, R.string.flash_on);
         } else {
             menuItem = menu.add(Menu.NONE, R.id.menu_flash, 0, R.string.flash_off);
@@ -85,7 +85,7 @@ public class FullScannerActivity extends BaseScannerActivity implements MessageD
         MenuItemCompat.setShowAsAction(menuItem, MenuItem.SHOW_AS_ACTION_NEVER);
 
 
-        if(mAutoFocus) {
+        if (mAutoFocus) {
             menuItem = menu.add(Menu.NONE, R.id.menu_auto_focus, 0, R.string.auto_focus_on);
         } else {
             menuItem = menu.add(Menu.NONE, R.id.menu_auto_focus, 0, R.string.auto_focus_off);
@@ -107,7 +107,7 @@ public class FullScannerActivity extends BaseScannerActivity implements MessageD
         switch (item.getItemId()) {
             case R.id.menu_flash:
                 mFlash = !mFlash;
-                if(mFlash) {
+                if (mFlash) {
                     item.setTitle(R.string.flash_on);
                 } else {
                     item.setTitle(R.string.flash_off);
@@ -116,7 +116,7 @@ public class FullScannerActivity extends BaseScannerActivity implements MessageD
                 return true;
             case R.id.menu_auto_focus:
                 mAutoFocus = !mAutoFocus;
-                if(mAutoFocus) {
+                if (mAutoFocus) {
                     item.setTitle(R.string.auto_focus_on);
                 } else {
                     item.setTitle(R.string.auto_focus_off);
@@ -143,7 +143,8 @@ public class FullScannerActivity extends BaseScannerActivity implements MessageD
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
             r.play();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         showMessageDialog("Contents = " + rawResult.getContents() + ", Format = " + rawResult.getBarcodeFormat().getName());
     }
 
@@ -163,7 +164,7 @@ public class FullScannerActivity extends BaseScannerActivity implements MessageD
     public void closeDialog(String dialogName) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         DialogFragment fragment = (DialogFragment) fragmentManager.findFragmentByTag(dialogName);
-        if(fragment != null) {
+        if (fragment != null) {
             fragment.dismiss();
         }
     }
@@ -191,17 +192,17 @@ public class FullScannerActivity extends BaseScannerActivity implements MessageD
 
     public void setupFormats() {
         List<BarcodeFormat> formats = new ArrayList<BarcodeFormat>();
-        if(mSelectedIndices == null || mSelectedIndices.isEmpty()) {
+        if (mSelectedIndices == null || mSelectedIndices.isEmpty()) {
             mSelectedIndices = new ArrayList<Integer>();
-            for(int i = 0; i < BarcodeFormat.ALL_FORMATS.size(); i++) {
+            for (int i = 0; i < BarcodeFormat.ALL_FORMATS.size(); i++) {
                 mSelectedIndices.add(i);
             }
         }
 
-        for(int index : mSelectedIndices) {
+        for (int index : mSelectedIndices) {
             formats.add(BarcodeFormat.ALL_FORMATS.get(index));
         }
-        if(mScannerView != null) {
+        if (mScannerView != null) {
             mScannerView.setFormats(formats);
         }
     }
