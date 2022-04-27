@@ -1,3 +1,8 @@
+
+**April 2022**
+
+Migrated this project to AndroidX added publication to Jitpack
+
 Project Archived
 ================
 **July 1 2020**
@@ -35,7 +40,7 @@ Add the following dependency to your build.gradle file.
 repositories {
    jcenter()
 }
-implementation 'me.dm7.barcodescanner:zxing:1.9.13'
+implementation 'com.github.Oknesif:zxing:tag'
 ```
 
 Simple Usage
@@ -152,7 +157,7 @@ Add the following dependency to your build.gradle file.
 repositories {
    jcenter()
 }
-implementation 'me.dm7.barcodescanner:zbar:1.9.13'
+implementation 'com.github.Oknesif:zbar:tag'
 ```
 
 Simple Usage
