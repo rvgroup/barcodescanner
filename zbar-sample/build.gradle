@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 dependencies {
-    implementation libraries.barcodescanner_zbar
+    implementation project(":zbar")
     implementation libraries.android_annotations
     implementation libraries.app_compat
     implementation libraries.material
